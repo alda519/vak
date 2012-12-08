@@ -4,6 +4,7 @@
 
 tex2pdf:
 	pdfcslatex dokumentace.tex
+	pdfcslatex dokumentace.tex
 	#vlna -l -n proj3.tex
 	#latex proj3.tex
 	#latex proj3.tex
