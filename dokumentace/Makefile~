@@ -1,0 +1,11 @@
+# Program: ITY - Projekt 3
+# Autor: Michal Cupák (xcupak04)
+# Datum: 2011-03-29
+
+tex2pdf:
+	#vlna -l -n proj3.tex
+	latex proj3.tex
+	latex proj3.tex
+	dvips -t a4 proj3.dvi
+	ps2pdf proj3.ps
+	#cp proj3.pdf ~/WWW/
