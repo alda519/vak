@@ -1,19 +1,68 @@
+/*
+ * IMS projekt - Workflow procesu v administrative
+ *
+ * Cupak Michal xcupak04
+ * Dujicek Ales xdujic01
+ */
+
 #include <simlib.h>
 #include <ctime>
 
-// pracovni doba [hod]
-#define WORKING_HOURS 7.5
-// delka simulace [dny]
-#define DAYS 50
+// vyber nastaveni modelu
+#define SIM_MODEL_VAK
 
-// pocet posty - prumerne [denne]
-#define POST_AVR 30
-// rozptyl poctu posty
-#define POSR_VAR 5
-// prumerne prichozu lidi osobne [denne]
-#define PEOPLE 10
-// prumerne prichozich elektronickych zprav [denne]
-#define EMAIL 20
+// model dle zjistenych dat
+#if defined(SIM_MODEL_VAK)
+
+    // pracovni doba [hod] (7.5)
+    #define WORKING_HOURS 7.5
+    // delka simulace [dny]
+    #define DAYS 50
+
+    // pocet prichozi posty denne [kus] (25-35)
+    #define POST_COUNT Uniform(25, 35)
+    // doba mezi prichody lidi [hod] (10 denne)
+    #define PEOPLE_INTERVAL Exponential(WORKING_HOURS / 10)
+    // doba mezi prichody elektronickych zprav [hod] (20 denne)
+    #define EMAIL_INTERVAL Exponential(WORKING_HOURS / 20)
+    // doba obsluhy lidi [hod] (prum. 5 min.)
+    #define PEOPLE_SER Exponential(1.0/12)
+    // doba mezi poruchami skeneru [hod] (1-2 za mesic)
+    #define PORUCHA (WORKING_HOURS * 10)
+
+    // pravdepodobnost, ze reditel neni dany den v praci (30%)
+    #define OOO_DIRECTOR 0.3
+
+    // zpracovani dokumentu sekretarkou [hod] (5-7 min)
+    #define WOR_SEC Uniform(1.0/12, 1.0/8.5)
+    #define WOR_DIR (1.0 / 80)
+    #define WOR_TCH_DEP
+    #define WOR_EKO_DEP
+    #define WOR
+
+    // procentualni rozdeleni dokumentu mezi useky
+    #define SEC_DIRECTOR 0.05
+    #define SEC_ECO 0.45
+    #define SEC_TECH 0.50
+
+    // stiznost zadost smlouva dotaz - delka zpracovani [dny]
+    #define STIZNOST 5-10
+    #define ZADOST 10
+    #define SMLOUVA 15
+    #define DOTAZ 5-10
+
+// experimenty ...
+#elif defined(SIM_EXPERIMENT1)
+
+#elif defined(SIM_EXPERIMENT2)
+
+#elif defined(SIM_EXPERIMENT3)
+
+#elif defined(SIM_EXPERIMENT4)
+
+#else
+    #error "Vyberte nektery z preddefinovanych modelu"
+#endif
 
 
 Facility sekretarka("Sekretarka");
@@ -25,18 +74,6 @@ Facility vedouci_tech("Vedouci technickeho useku");
 
 Histogram delka("Doba zpracovani dokumentu", 0, 0.5, 50);
 
-
-// stiznost zadost smlouva dotaz - delka zpracovani [hod]
-#define STIZNOST 8
-#define ZADOST 9
-#define SMLOUVA 16
-#define DOTAZ 8
-#define OSTATNI 8
-
-
-// TODO: poruchy skeneru jednou za 1000 hodin
-// nebo systemu
-
 // Prichozi dokument - od stiznosti, pres smlouvy, posudky, rozhodnuti...
 class Dokument : public Process
 {
@@ -46,47 +83,43 @@ class Dokument : public Process
         // sekretarka - prostuduje, naskenuje, oznaci, ulozi, zaradi
         // protridi, okomentuje, ...
         Seize(sekretarka);
-        Wait(1.0 / 12);
+        Wait(WOR_SEC);
         Release(sekretarka);
 
         // reditel velmi kratce prohledne dokument a prideli nekteremu useku
         Seize(reditel);
-        Wait(1.0 / 80);
+        Wait(WOR_DIR);
         Release(reditel);
 
-        znova: 
+        if(0) {
+            // dokument dorucen spatnemu cloveku, trochu se tim zdrzi
+            dorucen_zle:
+            Wait(1);
+        }
 
         double usek = Random();
-        if(usek < 0.33) { // usek reditele
+        if(usek < SEC_DIRECTOR) { // usek reditele
             // dostava zadano primo podrizeny reditele, aby se tim zabyval
             // vlastne doruceno adresatovi, takze takovy dokument skoncil
-            // TODO takto snadne?
-            if(Random() < 0.3)
-                goto znova;
-        } else if(usek < 0.66) { // ekonomicky usek
+            if(Random() < 0.02)
+                goto dorucen_zle;
+        } else if(usek < SEC_DIRECTOR + SEC_ECO) { // ekonomicky usek
             // TODO hm?
             Seize(namestek_ekon);
             Wait(1.0 / 10);
             Release(namestek_ekon);
-            if(Random() < 0.3)
-                goto znova;
+            if(Random() < 0.02)
+                goto dorucen_zle;
         } else { // technicky usek
             Seize(namestek_tech);
             Wait(1.0 / 10);
             // u nej se to ma taky zdrzet den-dva
             Release(namestek_tech);
-            if(Random() < 0.3)
-                goto znova;
+            if(Random() < 0.02)
+                goto dorucen_zle;
         }
-        // TODO pred skokem zdrzet
 
-        // TODO simulace spatne dorucenych papiru
-        // TODO simulace nejakych smycek
-
-        // TODO: dle typu papitu - udelat dobu zpracovani
-        // TODO zivot jednoho papiru
-
-        // TODO baba s postou?
+        // TODO: dle typu papiru vytvorit postu zpet
 
         delka(Time - born);
     }
@@ -94,18 +127,21 @@ public:
     double born;
 };
 
+int posta = 0; // pocet posty k odeslani
 // Postacka dorucuje kazdy den postu - simulace prichodu posty
 class Postacka : public Event
 {
     void Behavior()
     {
         // pocet posty je rovnomerne rozlozen
-        int p = Uniform(POST_AVR-POSR_VAR, POST_AVR+POSR_VAR);
+        int p = POST_COUNT;
         // postacka prijde rovnomerne v prubehu 1 hodiny
         double d = Random();
         // vsechny dopisy preda najednou
         for(int i = 0; i < p; ++i)
             (new Dokument())->Activate(Time + d);
+        // postacka si odnese odchozi postu
+        posta = 0;
         // postacka prijde i pristi den
         Activate(Time + WORKING_HOURS);
     }
@@ -122,7 +158,7 @@ class Clovek : public Process
         // behem rozhovoru se sekretarkou vznikne dokument, ktery je treba
         // take vyridit
         Seize(sekretarka);
-        Wait(1.0 / 6);
+        Wait(PEOPLE_SER);
         (new Dokument())->Activate();
         Release(sekretarka);
         // spokojeny klient odchazi
@@ -135,17 +171,18 @@ class Lide : public Event
     void Behavior()
     {
         (new Clovek())->Activate();
-        Activate(Time + Exponential(8.0 / PEOPLE));
+        Activate(Time + PEOPLE_INTERVAL);
     }
 };
 
+// Prichody elektronickych dokumentu (email + datove schanky)
 class Email : public Event
 {
     void Behavior()
     {
         // emailem prijde dokument
         (new Dokument())->Activate();
-        Activate(Time + Exponential(8.0 / EMAIL));
+        Activate(Time + EMAIL_INTERVAL);
     }
 };
 
@@ -163,7 +200,7 @@ class Reditel : public Process
             Seize(reditel, 1);
             reditel_vpraci = false;
             // 1,5 krat do tydne (3 * za 10 dnu) neni reditel k dispozici
-            if(Random() < 0.3) {
+            if(Random() < OOO_DIRECTOR) {
                 reditel_absence += 1;
                 Wait(WORKING_HOURS-1);
                 // pokud reditel nemuze 2 dny po sobe, tak ho zaskoci
@@ -217,8 +254,6 @@ void samp_s_f()
     );
 }
 Sampler samp_s(samp_s_f, 1.0 / 10);
-
-
 
 
 int main()
