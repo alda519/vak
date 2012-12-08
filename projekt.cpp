@@ -74,6 +74,8 @@ Facility vedouci_tech("Vedouci technickeho useku");
 
 Histogram delka("Doba zpracovani dokumentu", 0, 0.5, 50);
 
+extern int posta;
+
 // Prichozi dokument - od stiznosti, pres smlouvy, posudky, rozhodnuti...
 class Dokument : public Process
 {
@@ -94,7 +96,7 @@ class Dokument : public Process
         if(0) {
             // dokument dorucen spatnemu cloveku, trochu se tim zdrzi
             dorucen_zle:
-            Wait(1);
+            Wait(1); // TODO ???
         }
 
         double usek = Random();
@@ -104,7 +106,6 @@ class Dokument : public Process
             if(Random() < 0.02)
                 goto dorucen_zle;
         } else if(usek < SEC_DIRECTOR + SEC_ECO) { // ekonomicky usek
-            // TODO hm?
             Seize(namestek_ekon);
             Wait(1.0 / 10);
             Release(namestek_ekon);
@@ -119,13 +120,29 @@ class Dokument : public Process
                 goto dorucen_zle;
         }
 
-        // TODO: dle typu papiru vytvorit postu zpet
+
+        // na polovinu dokumentu se odpovida
+        if(Random() < 0.5) {
+            posta += 1;
+        }
 
         delka(Time - born);
     }
 public:
     double born;
 };
+
+
+// odvoz posty
+class OdvozPosty : public Event
+{
+    void Behavior()
+    {
+        // postacka si odnese odchozi postu
+        posta = 0;
+    }
+};
+
 
 int posta = 0; // pocet posty k odeslani
 // Postacka dorucuje kazdy den postu - simulace prichodu posty
@@ -141,7 +158,7 @@ class Postacka : public Event
         for(int i = 0; i < p; ++i)
             (new Dokument())->Activate(Time + d);
         // postacka si odnese odchozi postu
-        posta = 0;
+        (new OdvozPosty())->Activate(Time + d);
         // postacka prijde i pristi den
         Activate(Time + WORKING_HOURS);
     }
@@ -240,17 +257,37 @@ class Day : public Event
     }
 };
 
+bool porucha = false;
+class Porucha : public Process
+{
+    void Behavior()
+    {
+        // porucha se objevuje 1-2 x za mesic
+        while(1) {
+            double d = Exponential(WORKING_HOURS*40/3.0);
+            Wait(d);
+            Seize(sekretarka, 1);
+            porucha = true;
+            Wait(3);
+            Release(sekretarka);
+            porucha = false;
+        }
+    }
+};
+
 
 // sber casoveho prubehu delek front
 void samp_s_f()
 {
-    Print("%lf %d %d %d %d %d\n",
+    Print("%lf %d %d %d %d %d %d %d\n",
         Time,
         sekretarka.QueueLen(),
         reditel.QueueLen(),
-        reditel_vpraci ? 20 : 0,
+        reditel_vpraci ? -10 : 0,
         namestek_tech.QueueLen(),
-        day_odd ? -5 : 0
+        day_odd ? -5 : 0,
+        porucha ? -10 : 0,
+        posta
     );
 }
 Sampler samp_s(samp_s_f, 1.0 / 10);
@@ -277,6 +314,9 @@ int main()
     (new Lide())->Activate();
     // generovani prichozich emailu
     (new Email())->Activate();
+
+    // poruchy zarizeni sekretarky
+    (new Porucha())->Activate();
 
     // start simulace
     Run();
