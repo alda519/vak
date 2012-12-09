@@ -153,14 +153,27 @@ Poruchy zařízení sekretářky jsou modelovány procesy s příchodem s expone
 % Kapitola 5 - 
 \section{Podstata simulačních experimentů a jejich průběh}
 
-Experimentováním s modelem chceme zjistit možné doby transakcí strávených v systému v systému. Pomocí těchto experimentů chceme ukázat strukturní a funkčí optimalizace systému toku dat v administrativě. Dále chceme ukázat pracovní vytíženost jednotlivých zaměstnanců při administrativních záležitostech. K tomu využijeme modelu a jeho parametrizace, kdy například zvýšíme množství příchozí pošty, nebo poruchovost; zvýšíme či snížíme pracovní výkonnost zaměstnanců, atd.
+Experimentováním s modelem chceme zjistit možné doby transakcí strávených v systému. Pomocí těchto experimentů chceme ukázat strukturní a funkčí optimalizace systému toku dat v administrativě. Dále chceme ukázat pracovní vytíženost jednotlivých zaměstnanců při administrativních záležitostech. K tomu využijeme modelu a jeho parametrizace, kdy například zvýšíme množství příchozí pošty, nebo poruchovost; zvýšíme či snížíme pracovní výkonnost zaměstnanců, atd.
 
 % Experimentování musí mít předem zvolený a zdůvodněný řád, či postup
 % 5.1 Postup experimentování a okolnosti studie
 \subsection{Postup experimentování}
-blablabla
+V modelu jsou již zaneseny zjištěné informace, jako například pracovní doba, množství příchozích transakcí a jejich časová rozložení, doba mezi poruchami, cas, který jednotliví pracovníci stráví nad jednou transakcí, pravděpodobnost, zda je ředitel v práci, atd. Tyto volby jsou výrazným činitelem ovlivňujícím výsledek experimentu. Proto jsou zpočátku nastaveny na zjištěné a dále pro simulaci upravené hodnoty. Ty se budou pomocí experimentů dále upravovat tak, až bude model dostatečně podobný realitě. Poté se bude experimentovat pomocí změn těchto hodnot pro zjištění optimalizací systému.
+
+Výsledky experimentu budou čitelné v histogramu zobrazujícím dobu, kterou transakce stráví v systému. To znamená dobu do doručení transakce přímo adresátovi. Následná doba vyřizování příslušné transakce/dokumentu je v experimentech zanedbána, protože už se nejedná a studavanou problematiku. Z histogramu zjistíme, jaké jsou výsledky. Proč jsou výsledky takové, zjistíme z grafu závislostí vytíženosti jednotlivých pracovníků - tz. kde se hromadí dokumenty, kdo je kdy zpracovává, atd. 
+
+%
+%
+% POPIS GRAFU TADY ????
+%
+%
+
+Experimenty budou probíhat v období padesáti dnů.
 
 % 5.2 Dokumentace jednotlivých experimentů
+\subsection{Dokumentace jednotlivých experimentů}
+\subsubsection{Experiment 1}
+V tomto experimentu jsme na vstup zadali data, při kterých by měl model odpovídat realitě. Ve výsledném histogramu se většina transakcí dokončila velice rychle. V období padesáti pracovních dnů systémem prošlo 2711 transakcí. Maximální doba transakce strávené v systému byla 23.7 pracovních hodin. Průměrná doba vyřízení transakce byla 10.8 pracovních hodin. Standardní odchylka 4.1 hodiny. Z grafu závislostí jsme zjistili nedostatek modelu. Příchozí dokumenty se zdržely zejména u ředitele, na jednotlivích úsecích firmy se již takřka vůbec nezdrželi a téměř okamžitě putovali ke svým adresátům. V následujících experimentech se bude pracovat s novou verzí modelu, ve kterém se budou oba náměstci po většinu své pracovní doby věnovat jiným (důležitějsím) věcem. Administrativě se budou věnovat pouze zhruba hodinu během jednoho pracovního dne.
 % 5.3 Závěr experimentů
 % Co bylo experimentováním zjištěno
 % Jaké chyby v modelu byly odstraněny (oproti původním předpokladům ... došlo ke změně koncepce ... protože ..
