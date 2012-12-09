@@ -91,6 +91,23 @@ Všechny informace uvedené v této kapitole byly poskytnuty zaměstnancem veden
 % Kapitola 3 - 
 \section{Koncepce - modelářská témata}
 
+Jako jednotku času v simulaci jsme zvolili jednu hodinu.
+Modelovat budeme pouze pracovní dobu zaměstnanců. Noci, víkendy a jiné události, kvůli kterým se nepracuje, jsou vynechány.
+Tedy v čase 0 začíná první pracovní den a v čase 7.5 začíná druhý bez ohledu na to, zda mezi nimi byl např. víkend.
+
+Příchody dokumentů do systému modelujeme procesy zvlášť pro příchozí klasickou poštu, elekteronickou poštu a příchody lidí osobně.
+Elektronická pošta zahrnuje emaily společně s datovými schránkami, není potřeba je rozlišovat, protože jejich zpracování probíhá totožně.
+Příchody lidí jsou modelovány příchody procesů v intervalech daných exponenciálním rodělením se středem $T/n$, kde $T$ je délka pracovního dne v hodinách a $n$ průměrný počet příchodů denně.
+Obdobně je modelován příchod dokumentů elektronicky, možnost příchodu elektronické zprvávy mimo pracovní dobu (např. v noci) zanedbáváme.
+
+Ředitel společnosti je modelován zařízením s výlučným přístupem, které je po dobu 6.5 hodiny obsazeno procesem s prioritou obsluhy
+představujícím všechny jeho pracovní povinnosti mimo administrativu, pro kterou je po zbylou 1 hodinu uvolněn.
+Nezabýváme se, kdy přesně se administrativě ředitel věnuje, modelujeme pouze fakt, že se této činnosti věnuje pravidelně každý den danou dobu.
++ někdy je pryč pořád
+
+další zpracování
+
+poruchy
 
 % Konceptuální model je abstrakce reality a redukce reality na soubor relevantních faktů pro sestavení simulačního modelu.
 % Pokud některé partie reality zanedbáváte nebo zjednodušujete, musí to být zdůvodněno a videálním případě musí být prokázáno, že to neovlivní validitu modelu.
