@@ -113,17 +113,16 @@ Tedy v čase 0 začíná první pracovní den a v čase 7.5 začíná druhý bez
 
 Příchody dokumentů do systému modelujeme procesy zvlášť pro příchozí klasickou poštu, elekteronickou poštu a příchody lidí osobně.
 Elektronická pošta zahrnuje emaily společně s datovými schránkami, není potřeba je rozlišovat, protože jejich zpracování probíhá totožně.
-Příchody lidí jsou modelovány příchody procesů v intervalech daných exponenciálním rozdělením se středem $T/n$ \cite{ims-rozlozeni}, kde $T$ je délka pracovního dne v hodinách a $n$ průměrný počet příchodů denně.
+Příchody lidí jsou modelovány příchody procesů v intervalech daných exponenciálním rozdělením se středem $T/n$ \cite{ims-rozlozeni}, kde $T$ je délka pracovního dne v ho\-di\-nách a $n$ průměrný počet příchodů denně.
 Obdobně je modelován příchod dokumentů elektronicky, možnost příchodu elektronické zprvávy mimo pracovní dobu (např. v noci) zanedbáváme.
 
-Ředitel společnosti je modelován zařízením s výlučným přístupem \cite{ims-zarizeni}, které je po dobu 6.5 hodiny obsazeno procesem s prioritou obsluhy
-představujícím všechny jeho pracovní povinnosti mimo administrativu, pro kterou je po zbylou 1 hodinu uvolněn.
-Nezabýváme se, kdy přesně se administrativě ředitel věnuje, modelujeme pouze fakt, že se této činnosti věnuje pravidelně každý den danou dobu.
-+ někdy je pryč pořád
+Ředitel společnosti je modelován zařízením s výlučným přístupem \cite{ims-zarizeni}, které je po dobu 6.5 hodiny obsazeno procesem s vyšší prioritou obsluhy,
+který představuje všechny jeho pracovní povinnosti mimo administrativu, pro kterou je po zbylou 1 hodinu uvolněn.
+Ne\-za\-bý\-vá\-me se, kdy přesně se administrativě ředitel věnuje, modelujeme pouze fakt, že se této činnosti věnuje pravidelně každý den danou dobu.
 
-další zpracování
+S pravděpodobností 30\% ředitel uvolněn pro administrativu není, tímto modelujeme fakt, že průměrně třikrát za dva týdny není pro administrativu k dispozici (3 z 10 pracovních dnů opovídá 30\% dnů).
 
-poruchy
+Poruchy zařízení sekretářky jsou modelovány procesy s příchodem s exponenciálním rozdělením se středem 100 hodin. Předpokládáme že měsíc má 20 pracovních dní, tedy 150 pracovních hodin, během kterých se objeví průměrně 1.5 poruchy.
 
 % Konceptuální model je abstrakce reality a redukce reality na soubor relevantních faktů pro sestavení simulačního modelu.
 % Pokud některé partie reality zanedbáváte nebo zjednodušujete, musí to být zdůvodněno a videálním případě musí být prokázáno, že to neovlivní validitu modelu.

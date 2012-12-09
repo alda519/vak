@@ -28,13 +28,14 @@
     // doba obsluhy lidi [hod] (prum. 5 min.)
     #define PEOPLE_SER Exponential(1.0/12)
     // doba mezi poruchami skeneru [hod] (1-2 za mesic)
-    #define PORUCHA (WORKING_HOURS * 10)
+    #define PORUCHA Exponential(WORKING_HOURS*40/3.0)
 
     // pravdepodobnost, ze reditel neni dany den v praci (30%)
     #define OOO_DIRECTOR 0.3
 
     // zpracovani dokumentu sekretarkou [hod] (5-7 min)
     #define WOR_SEC Uniform(1.0/12, 1.0/8.5)
+    // zpracovani reditelem
     #define WOR_DIR (1.0 / 80)
     #define WOR_TCH_DEP
     #define WOR_EKO_DEP
@@ -119,7 +120,6 @@ class Dokument : public Process
             if(Random() < 0.02)
                 goto dorucen_zle;
         }
-
 
         // na polovinu dokumentu se odpovida
         if(Random() < 0.5) {
@@ -240,10 +240,8 @@ class Reditel : public Process
             }
         }
     }
-    // TODO: kdyz ma hodne prace, tak tomu dat vic casu
+    // napad: kdyz ma hodne prace, tak by se mohl venovat dele administrative
 };
-// TODO: zvazit zda je while(1) dobre nebo misto toho dat event, co se bude co
-// den delat znova
 
 
 // modelovani stridani dnu - jen pro ucely zobrazeni v grafu
@@ -264,7 +262,7 @@ class Porucha : public Process
     {
         // porucha se objevuje 1-2 x za mesic
         while(1) {
-            double d = Exponential(WORKING_HOURS*40/3.0);
+            double d = PORUCHA;
             Wait(d);
             Seize(sekretarka, 1);
             porucha = true;
