@@ -70,7 +70,7 @@ Počet a procentuální rozdělení příchozích dokumentů byl konzultován s 
 % Kapitola 2 - 
 \section{Rozbor tématu a použitých metod/technologií}
 
-Administrativa společnosti Vodovody a kanalizace Vyškov zahrnuje zpracování dokumentů (stížnosti, žádosti, smlouvy a dotazy), které jim lidé posílají poštou, elektronicky emaily a datovými schránkami a doručují osobně. Tok dokumentů je znázorněn na obrázku \ref{tok_dokumentu}.
+Administrativa společnosti Vodovody a kanalizace Vyškov zahrnuje zpracování dokumentů (stížnosti, žádosti, smlouvy a dotazy), které jim lidé posílají poštou, elektronicky emaily a datovými schránkami a doručují osobně. Tok dokumentů je znázorněn na obrázku \ref{tok_dokumentu} a popsán v následujících odstavcích.
 
 Všechny příchozí dokumenty zpracovává sekretářka ředitele, která je musí naskenovat speciálním skenerem, vytisknout označené čárovým kódem a zaevidovat do informačního systému. Sekretářka se administrativní činnosti věnuje celou svou pracovní dobu.
 
@@ -83,11 +83,15 @@ Dokumenty k vyřízení v ekonomickém úseku prostuduje ekonomický náměstek,
 
 V technickém úseku dokumenty nejprve prostuduje technický náměstek. Ten může jejich vyřízením pověřit své přímé podřízené, nebo může daný dokument předat vedoucímu technického úseku, který jej následně předá k vyřízení některému ze svých přímých podřízených.
 
+Ve 2\% případů se dokument doručí špatnému člověku. Tudíž se musí dokument vrátit zpět k nadřízenému, který své předchozí rozhodnutí přehodnotí, případně dokument doručí řediteli či přímo náměstkovi druhého úseku. Dokument se tak déle zdrží.
+
 Průměrně jednou až dvakrát měsíčně se objeví porucha technického zařízení, se kterým pracuje sekretářka. Ta potom po dobu opravy, která trvá průměrně 3 hodiny, nemůže dokumenty zpracovávat.
 
 Pracovní doba zaměstnanců společnosti je 7,5 hodiny denně. Poštu přiváží pracovník pošty každý den mezi 9. a 10. hodinou, současně odveze odchozí poštu.
 
 Denně je průmerně zaevidováno 50-60 příchozích dokumentů, které nejčastěji při\-chá\-zí klasickou poštou (20-30), dále elektronicky (20) a nejméně osobně (10).
+
+Reálná doba doručení dokumentu k adresátovi se pohybuje okolo tří pracovních dnů. Maximální doba pak okolo pěti pracovních dnů.
 
 Všechny informace uvedené v této kapitole byly poskytnuty zaměstnancem vedení spo\-leč\-nos\-ti, panem Ing. Oldřichem Novoměstským.
 
@@ -109,7 +113,7 @@ Příchody transakcí do systému jsou modelovány událostmi, protože nemají 
 
 \subsection{Popis původu použitých metod}
 
-Během modelování jsme využivali znalosti získané na přednáškách a demosntračních cvičeních předmětu Modelování a simulace (IMS).
+Během modelování jsme využívali znalosti získané na přednáškách a demosntračních cvičeních předmětu Modelování a simulace (IMS).
 
 \newpage
 
@@ -169,7 +173,7 @@ Experimentováním s modelem chceme zjistit možné doby transakcí strávených
 \subsection{Postup experimentování}
 V modelu jsou již zaneseny zjištěné informace, jako například pracovní doba, množství příchozích transakcí a jejich časová rozložení, doba mezi poruchami, cas, který jednotliví pracovníci stráví nad jednou transakcí, pravděpodobnost, zda je ředitel v práci, atd. Tyto volby jsou výrazným činitelem ovlivňujícím výsledek experimentu. Proto jsou zpočátku nastaveny na zjištěné a dále pro simulaci upravené hodnoty. Ty se budou pomocí experimentů dále upravovat tak, až bude model dostatečně podobný realitě. Poté se bude experimentovat pomocí změn těchto hodnot pro zjištění optimalizací systému.
 
-Výsledky experimentu budou čitelné v histogramu zobrazujícím dobu, kterou transakce stráví v systému. To znamená dobu do doručení transakce přímo adresátovi. Následná doba vyřizování příslušné transakce/dokumentu je v experimentech zanedbána, protože už se nejedná a studavanou problematiku. Z histogramu zjistíme, jaké jsou výsledky. Proč jsou výsledky takové, zjistíme z grafu závislostí vytíženosti jednotlivých pracovníků - tz. kde se hromadí dokumenty, kdo je kdy zpracovává, atd. 
+Výsledky experimentu budou čitelné v histogramu zobrazujícím dobu, kterou transakce stráví v systému. To znamená dobu do doručení transakce přímo adresátovi. Následná doba vyřizování příslušné transakce/dokumentu je v experimentech zanedbána, protože už se nejedná a studavanou problematiku. Z histogramu zjistíme, jaké jsou výsledky. Proč jsou výsledky takové, zjistíme z grafu závislostí vytíženosti jednotlivých pracovníků - tzn. kde se hromadí dokumenty, kdo je kdy zpracovává, atd. 
 
 %
 %
