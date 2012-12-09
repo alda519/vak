@@ -20,7 +20,7 @@
     #define DAYS 50
 
     // pocet prichozi posty denne [kus] (25-35)
-    #define POST_COUNT Uniform(25, 35)
+    #define POST_COUNT Uniform(20, 30)
     // doba mezi prichody lidi [hod] (10 denne)
     #define PEOPLE_INTERVAL Exponential(WORKING_HOURS / 10)
     // doba mezi prichody elektronickych zprav [hod] (20 denne)
