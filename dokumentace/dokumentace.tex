@@ -199,7 +199,29 @@ Experimenty budou modelovat průběh padesáti pracovních dnů.
 % 5.2 Dokumentace jednotlivých experimentů
 \subsection{Dokumentace jednotlivých experimentů}
 \subsubsection{Experiment 1}
-V tomto experimentu jsme na vstup zadali data, při kterých by měl model odpovídat realitě. Ve výsledném histogramu se většina transakcí dokončila velice rychle. V období padesáti pracovních dnů systémem prošlo 2711 transakcí. Maximální doba transakce strávené v systému byla 23.7 pracovních hodin. Průměrná doba vyřízení transakce byla 10.8 pracovních hodin. Standardní odchylka 4.1 hodiny. Z grafu závislostí jsme zjistili nedostatek modelu. Příchozí dokumenty se zdržely zejména u ředitele, na jednotlivích úsecích firmy se již takřka vůbec nezdrželi a téměř okamžitě putovali ke svým adresátům. V následujících experimentech se bude pracovat s novou verzí modelu, ve kterém se budou oba náměstci po většinu své pracovní doby věnovat jiným (důležitějsím) věcem. Administrativě se budou věnovat pouze zhruba hodinu během jednoho pracovního dne.
+V tomto experimentu jsme parametry modelu nijak nemodifikovali, očekávali jsme, že výsledky budou odpovídat skutečnosti.
+Oproti očekávání se většina transakcí dokončila velice rychle.
+V období padesáti pracovních dnů systémem prošlo 2721 transakcí.
+Ma\-xi\-mál\-ní doba transakce strávené v systému byla 19.6 pracovních hodin.
+Průměrná doba vyřízení transakce byla 8.01 pracovních hodin. Standardní odchylka 3.87 hodiny.
+
+Z časového průběhu délek front jednotlivých zaměstnanců, jsme zjistili nedostatek modelu.
+Příchozí dokumenty se zdržely zejména u ředitele, na jednotlivích úsecích firmy se již takřka vůbec nezdržely a téměř okamžitě putovaly ke svým adresátům.
+To bylo způsobeno tím, že náměstci byli celou dobu k dispozici k práci na administrativě a nevznikalo u nich zpoždění ve frontách.
+Ve skutečnosti je ale administrativa, podobně jako u ředitele, jen část náplně jejich pracovní doby.
+
+V následujících experimentech budeme pracovat s upraveným modelem, ve kterém se tento nedostatek neprojeví.
+Oba náměstci se po většinu své pracovní doby budou věnovat jiným pracovním povinnostem a administrativě  
+pouze hodinu během jednoho pracovního dne jako ředitel.
+
+\begin{figure}[ht]
+ \begin{center}
+    \scalebox{0.4}{ \includegraphics{../experimenty/ex1-histogram.png} }
+    \caption{1. experiment - histogram doby zpracování dokumentu}
+    \label{tok_dokumentu}
+ \end{center}
+\end{figure}
+
 % 5.3 Závěr experimentů
 % Co bylo experimentováním zjištěno
 % Jaké chyby v modelu byly odstraněny (oproti původním předpokladům ... došlo ke změně koncepce ... protože ..
