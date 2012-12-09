@@ -250,12 +250,13 @@ class Namestek_t : public Process
 {
     void Behavior()
     {
-        Priority = 1;
         while(1) {
             Seize(namestek_tech, 1);
             Wait(WORKING_HOURS-1);
             Release(namestek_tech);
-            Wait(1);
+            // pokud nezaskakuje reditele, tak se venuje sve praci
+            if(reditel_absence <= 1)
+                Wait(1);
         }
     }
 };
@@ -263,7 +264,6 @@ class Namestek_e : public Process
 {
     void Behavior()
     {
-        Priority = 1;
         while(1) {
             Seize(namestek_ekon, 1);
             Wait(WORKING_HOURS-1);
