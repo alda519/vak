@@ -8,16 +8,6 @@
 #include <simlib.h>
 #include <ctime>
 
-// vyber nastaveni modelu
-#define SIM_MODEL_VAK
-//#define SIM_EXPERIMENT1
-//#define SIM_EXPERIMENT2
-//#define SIM_EXPERIMENT3
-//#define SIM_EXPERIMENT4
-
-
-// model dle zjistenych dat
-#if defined(SIM_MODEL_VAK)
 
     // pracovni doba [hod] (7.5)
     #define WORKING_HOURS 7.5
@@ -51,25 +41,6 @@
     #define SEC_DIRECTOR 0.05
     #define SEC_ECO 0.45
     #define SEC_TECH 0.50
-
-    // stiznost zadost smlouva dotaz - delka zpracovani [dny] - nepouziva se 
-    #define STIZNOST 5-10
-    #define ZADOST 10
-    #define SMLOUVA 15
-    #define DOTAZ 5-10
-
-// experimenty ...
-#elif defined(SIM_EXPERIMENT1)
-
-#elif defined(SIM_EXPERIMENT2)
-
-#elif defined(SIM_EXPERIMENT3)
-
-#elif defined(SIM_EXPERIMENT4)
-
-#else
-    #error "Vyberte nektery z preddefinovanych modelu"
-#endif
 
 
 Facility sekretarka("Sekretarka");
@@ -107,7 +78,7 @@ class Dokument : public Process
         if(0) {
             // dokument dorucen spatnemu cloveku, trochu se tim zdrzi
             dorucen_zle:
-            Wait(1); // TODO ???
+            Wait(1); //
         }
 
         double usek = Random();
