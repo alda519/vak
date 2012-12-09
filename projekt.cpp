@@ -43,7 +43,7 @@
     // zpracovani reditelem
     #define WOR_DIR (1.0 / 80)
     // zpracovani dokumentu tech. namestkem [hod]
-    #define WOR_TCH_DEP (1.0 / 30)
+    #define WOR_TCH_DEP (1.0 / 40)
     // zpracovani dokumentu ekon. namestkem [hod]
     #define WOR_EKO_DEP (1.0 / 30)
 
