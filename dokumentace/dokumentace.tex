@@ -216,7 +216,7 @@ V období padesáti pracovních dnů systémem prošlo 2721 transakcí.
 Ma\-xi\-mál\-ní doba trans\-ak\-ce strávené v systému byla 19.6 pracovních hodin.
 Průměrná doba vyřízení transakce byla 8.01 pracovních hodin. Standardní odchylka 3.87 hodiny.
 
-Z časového průběhu délek front jednotlivých zaměstnanců, jsme zjistili nedostatek mo\-de\-lu.
+Z časového průběhu délek front jednotlivých zaměstnanců jsme zjistili nedostatek mo\-de\-lu.
 Příchozí dokumenty se zdržely zejména u ředitele, na jednotlivích úsecích firmy se již takřka vůbec nezdržely a téměř okamžitě putovaly ke svým adresátům.
 To bylo způsobeno tím, že náměstci byli celou dobu k dispozici k práci na administrativě a nevznikalo u nich zpoždění ve frontách.
 Ve skutečnosti je ale administrativa, podobně jako u ředitele, jen část náplně jejich pracovní doby.
@@ -232,6 +232,17 @@ pouze hodinu během jednoho pracovního dne jako ředitel.
     \label{exp1_histogram}
  \end{center}
 \end{figure}
+
+
+\subsubsection{Experiment 2}
+Parametry opět zůstaly nemodifikované, pouze experimentujeme s novou verzí mo\-de\-lu. V této verzi modelu se sekretářka věnuje administrativní činnosti po celou svou pracovní dobu. Ředitel se administrativě věnuje jednu hodinu denně a stejně tak i oba náměstkové. 
+
+Doby transakcí trávících v systému se oproti experimentu č. 1 prodloužili a jsou již velice blízké realitě. Histogram doby zpracování dokumentu v systému z tohoto experimentu je na obrázku \ref{exp2_histogram}.
+V tomto experimentu systémem prošlo 2677 transakcí. Maximální doba zpracování transakce byla 36.2 pracovních hodin. Průměrná doba zpracování transakce byla 15.9 hodin. Standardní odchylka 5.6 hodin.
+
+V histogramu vidíme, že první větší výskyt dokončených transakcí je kolem 5. pracovní hodiny. Toto je případ, kdy se všichni hlavní činitelé v systému (sekretářka, ředitel, náměstci) synchronyzují, všichni jsou v práci a věnují se administrativě. Většina transakcí je dokončena mezi 11. a 22. pracovní hodinou, což odpovídá reálnému optimálnímu dokončení transakce.
+
+V dalším experimentu již prověříme model při výraznějších změnách parametrů.
 
 % 5.3 Závěr experimentů
 % Co bylo experimentováním zjištěno
