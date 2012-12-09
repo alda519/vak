@@ -5,7 +5,7 @@
 %%
 
 %\documentclass[11pt,a4paper]{article}
-\documentclass[a4paper]{article}
+\documentclass[12pt,a4paper]{article}
 \usepackage[a4paper]{geometry}
 \usepackage[czech]{babel}
 %\usepackage{czech}
@@ -31,9 +31,9 @@
 \input{./title.tex}
 
 % Obsah
-\thispagestyle{empty}
-\tableofcontents
-\newpage
+% \thispagestyle{empty}
+% \tableofcontents
+% \newpage
 
 % Kapitola 1 - Úvod
 \section{Úvod}
@@ -43,7 +43,7 @@ sestavení modelu zpracování dokumentů v administrativě firmy Vodovody a kan
 Na základě modelu a simulačních experimentů bude ukázáno 
 chování systému toku dokumentů mezi jednotlivými zaměstnanci firmy v podmínkách běžné denní činnosti firmy.\\ 
 \\
-Smyslem experimentů je demonstrovat, jak se při změně jakékoliv veličiny ovlivňující tok dokumentů ve studované firmě změní délka zpracování daného dokumentu či vytížení ostatních zaměstnanců studované firmy.\\
+Smyslem experimentů je demonstrovat, jak se při změně jakékoliv veličiny ovlivňující tok dokumentů ve studované firmě změní délka zpracování daného dokumentu či vy\-tí\-že\-ní ostatních zaměstnanců studované firmy.\\
 \\
 Správnost zvolené koncepce byla ověřena přímo se zaměstnancem studované firmy.\\
 \\
@@ -54,7 +54,7 @@ Autory této práce jsou studenti Fakulty informačních technologií Vysokého 
 \\
 Dodavatelem odborných faktů byl Ing. Oldřich Novoměstský, vedoucí technického úseku ve studované firmě Vodovody a kanalizace Vyškov.\\
 \\
-Odborným konzultantem byl taktéž Ing. Novoměstský ve spolupráci s paní Annou Sýkorovou, sekretářkou ředitele.
+Odborným konzultantem byl taktéž Ing. Novoměstský ve spolupráci s paní Annou Sýkorovou, se\-kre\-tář\-kou ředitele.
 
 \subsection{Ověření validity modelu}
 Ověřování validity modelu probíhalo při osobních setkáních s Ing. Novoměstským. Jednalo se především o vysvětlení problematiky zpracování dokumentů ve studované firmě. Dále pak o ověření funkčnosti modelu pomocí konzultace grafů vzniklých ze simulace.\\
@@ -66,26 +66,76 @@ Počet a procentuální rozdělení příchozích dokumentů byl konzultován s 
 
 % Kapitola 2 - 
 \section{Rozbor tématu a použitých metod/technologií}
+
+Administrativa společnosti Vodovody a kanalizece Vyškov zahrnuje zpracování dokumentů (stížnosti, žádosti, smlouvy a dotazy), které jim lidé posílají poštou, elektronicky emaily a datovými schránkami a doručují osobně.
+Všechny příchozí dokumenty zpracovává sekretářka ředitele, která je musí naskenovat speciálním skenerem, vytisknout označené čárovým kódem a zaevidovat do informačního systému. Sekretářka se administrativní činnosti věnuje celou svou pracovní dobu.
+
+Takto zpracované dokumenty prohlíží ředitel, který je dle obsahu přiděluje k vyřízení pracovníkům některému z úseků (úsek ředitele, ekonomický úsek, technický úsek). Ředitel se pro své vytížení jinými pracovními povinnostmi věnuje této administrativě průmerně hodinu denně.
+
+Dokumenty k vyřízení v technickém a ekonomickém úseku prostuduje náměstek úseku, který potom jejich vyřízením pověřuje své přímé podřízené. V úseku ředitele jsou dokumenty přímo přidělovány ředitelem konkrétním pracovníkům.
+% jeste tam je vedouci technickoho useku
+
+Průměrně jednou až dvakrát měsičně, se objeví porucha zařízení, se kterým pracuje sekretářka, ta potom po dobu opravy, která trvá průměrně 3 hodiny nemůže dokumenty zpracovávat.
+
+Všechny informace uvedené v této kapitole byly poskytnuty zaměstnancem vedení společnosti, panem Ing. Oldřichem Novoměstským.
+
+\subsection{Popis použitých postupů}
+\subsection{Popis původu použitých metod}
+
 \newpage
 
 
 % Kapitola 3 - 
 \section{Koncepce - modelářská témata}
+
+% Konceptuální model je abstrakce reality a redukce reality na soubor relevantních faktů pro sestavení simulačního modelu.
+% Pokud některé partie reality zanedbáváte nebo zjednodušujete, musí to být zdůvodněno a videálním případě musí být prokázáno, že to neovlivní validitu modelu.
+% Výsledek kapitoly: konceptuální (abstraktní) model s vyznačením relevantních faktů.
+
+%  převzetí faktů do modelu
+%  zdůvodněné provedené zjednodušení faktů
+%  abstraktní popis modelu/programu
+
+% Návod: koncepci vaší práce MUSÍ pochopit libovolný technik (a často i manažer...)
+
 \newpage
 
 
 % Kapitola 4 - 
 \section{Architektura simulačního modelu/simulátoru}
+
+% Nejméně zajímavá část. Obvykle se neuvádí.
+% Rozeberte několik nejzajímavějších partií implementace
+% Případná uživatelská příručka (spuštění programu, struktura výpisů, ...).
+% O funkčnosti modelu musí přesvědčit kapitla 3.
+% Není to referenční příručka!
+
+% tuhle kapitolu asi hodne odflaknem, kdyz pise, ze neni zajimava
 \newpage
 
 
 % Kapitola 5 - 
 \section{Podstata simulačních experimentů a jejich průběh}
+
+% Experimentování musí mít předem zvolený a zdůvodněný řád, či postup
+% 5.1 Postup experimentování a okolnosti studie
+% 5.2 Dokumentace jednotlivých experimentů
+% 5.3 Závěr experimentů
+% Co bylo experimentováním zjištěno
+% Jaké chyby v modelu byly odstraněny (oproti původním předpokladům ... došlo ke změně koncepce ... protože ..
 \newpage
 
 
 % Kapitola 6 - 
 \section{Shrnutí simulačních experimentů a závěr}
+
+% Jednoznačná odpověď na prvotní otázku studie.
+%  Studií provedenou na našem modelu bylo jednoznačně prokázáno/vyvráceno, že ...
+%  V rámci experimentů bylo zjištěno, že průměrné zatížení ... je ...
+%  Z experimentů vyplývá jednoznačné doporučení, aby provozovatel ... rozšířil výrobu o ...
+%  Ze statisticky zpracovaného měření v terénu plyne, že proces příchodů ... se řídí normálním rozložením se středem a ....
+% • Na přiložených demo-příkladech jsme ověřili funkčnost ...
+
 \newpage
 
 
