@@ -33,24 +33,26 @@
     // doba obsluhy lidi [hod] (prum. 5 min.)
     #define PEOPLE_SER Exponential(1.0/12)
     // doba mezi poruchami skeneru [hod] (1-2 za mesic)
-    #define PORUCHA (WORKING_HOURS * 10)
+    #define PORUCHA Exponential(WORKING_HOURS*40/3.0)
 
     // pravdepodobnost, ze reditel neni dany den v praci (30%)
     #define OOO_DIRECTOR 0.3
 
     // zpracovani dokumentu sekretarkou [hod] (5-7 min)
     #define WOR_SEC Uniform(1.0/12, 1.0/8.5)
+    // zpracovani reditelem
     #define WOR_DIR (1.0 / 80)
-    #define WOR_TCH_DEP
-    #define WOR_EKO_DEP
-    #define WOR
+    // zpracovani dokumentu tech. namestkem [hod]
+    #define WOR_TCH_DEP (1.0 / 30)
+    // zpracovani dokumentu ekon. namestkem [hod]
+    #define WOR_EKO_DEP (1.0 / 30)
 
     // procentualni rozdeleni dokumentu mezi useky
     #define SEC_DIRECTOR 0.05
     #define SEC_ECO 0.45
     #define SEC_TECH 0.50
 
-    // stiznost zadost smlouva dotaz - delka zpracovani [dny]
+    // stiznost zadost smlouva dotaz - delka zpracovani [dny] - nepouziva se 
     #define STIZNOST 5-10
     #define ZADOST 10
     #define SMLOUVA 15
@@ -112,19 +114,18 @@ class Dokument : public Process
                 goto dorucen_zle;
         } else if(usek < SEC_DIRECTOR + SEC_ECO) { // ekonomicky usek
             Seize(namestek_ekon);
-            Wait(1.0 / 10);
+            Wait(WOR_EKO_DEP);
             Release(namestek_ekon);
             if(Random() < 0.02)
                 goto dorucen_zle;
         } else { // technicky usek
             Seize(namestek_tech);
-            Wait(1.0 / 10);
+            Wait(WOR_TCH_DEP);
             // u nej se to ma taky zdrzet den-dva
             Release(namestek_tech);
             if(Random() < 0.02)
                 goto dorucen_zle;
         }
-
 
         // na polovinu dokumentu se odpovida
         if(Random() < 0.5) {
@@ -228,7 +229,7 @@ class Reditel : public Process
                 // pokud reditel nemuze 2 dny po sobe, tak ho zaskoci
                 // technicky namestek
                 if(reditel_absence > 1) {
-                    Seize(namestek_tech, 1);
+                    Seize(namestek_tech, 2);
                     Release(reditel);
                     Wait(1);
                     Release(namestek_tech);
@@ -245,10 +246,37 @@ class Reditel : public Process
             }
         }
     }
-    // TODO: kdyz ma hodne prace, tak tomu dat vic casu
+    // napad: kdyz ma hodne prace, tak by se mohl venovat dele administrative
 };
-// TODO: zvazit zda je while(1) dobre nebo misto toho dat event, co se bude co
-// den delat znova
+
+
+// namestci se take nevenuji administrative stale
+class Namestek_t : public Process
+{
+    void Behavior()
+    {
+        Priority = 1;
+        while(1) {
+            Seize(namestek_tech, 1);
+            Wait(WORKING_HOURS-1);
+            Release(namestek_tech);
+            Wait(1);
+        }
+    }
+};
+class Namestek_e : public Process
+{
+    void Behavior()
+    {
+        Priority = 1;
+        while(1) {
+            Seize(namestek_ekon, 1);
+            Wait(WORKING_HOURS-1);
+            Release(namestek_ekon);
+            Wait(1);
+        }
+    }
+};
 
 
 // modelovani stridani dnu - jen pro ucely zobrazeni v grafu
@@ -269,7 +297,7 @@ class Porucha : public Process
     {
         // porucha se objevuje 1-2 x za mesic
         while(1) {
-            double d = Exponential(WORKING_HOURS*40/3.0);
+            double d = PORUCHA;
             Wait(d);
             Seize(sekretarka, 1);
             porucha = true;
@@ -284,7 +312,7 @@ class Porucha : public Process
 // sber casoveho prubehu delek front
 void samp_s_f()
 {
-    Print("%lf %d %d %d %d %d %d %d\n",
+    Print("%lf %d %d %d %d %d %d %d %d %d\n",
         Time,
         sekretarka.QueueLen(),
         reditel.QueueLen(),
@@ -292,7 +320,8 @@ void samp_s_f()
         namestek_tech.QueueLen(),
         day_odd ? -5 : 0,
         porucha ? -10 : 0,
-        posta
+        posta,
+        namestek_ekon.QueueLen()
     );
 }
 Sampler samp_s(samp_s_f, 1.0 / 10);
@@ -322,6 +351,9 @@ int main()
 
     // poruchy zarizeni sekretarky
     (new Porucha())->Activate();
+
+    (new Namestek_t())->Activate();
+    (new Namestek_e())->Activate();
 
     // start simulace
     Run();
