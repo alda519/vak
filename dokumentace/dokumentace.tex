@@ -159,7 +159,7 @@ Poruchy zařízení sekretářky jsou modelovány procesy s příchodem s expone
 % Kapitola 4 - 
 \section{Architektura simulačního modelu/simulátoru}
 
-Simulační model je implementován v jazyce C++ s využitím knihovny SIMLIB/C++.
+Simulační model je implementován v jazyce C++ s využitím knihovny SIMLIB/C++ \cite{simlib}.
 % tohle je nejake moc strucne
 
 % Nejméně zajímavá část. Obvykle se neuvádí.
@@ -283,6 +283,11 @@ dočasná výpomoc sekretářce dalším pracovníkem. Tento scénář je pouze 
 % 5.3 Závěr experimentů
 % Co bylo experimentováním zjištěno
 % Jaké chyby v modelu byly odstraněny (oproti původním předpokladům ... došlo ke změně koncepce ... protože ..
+\subsubsection{Závěr experimentů}
+Oproti původním předpokladům došlo ke změně koncepce, protože doba setrvání transakcí v systému byla příliš nízká a neodpovídala realitě. Bylo to způsobeno přílišný zjednodušením reality a zanedbáním faktu, že se pracovníci věnují i jiné práci než jen administrativě (kromě sekretářky). Změna se týkala hlavně pracovní činnosti náměstků.
+
+Byly provedeny 3 hlavní experimenty. První experiment byl testovací. Druhý experiment odpovídá reálnému provozu firmy Vodovody a kanalizace Vyškov. Třetí experiment ukazuje, co se stane při dlouhodobější poruše technického zařízení, jaké to bude mít důsledky do budoucna. Z experimentů lze odvodit, že chování systému je dostatečně věrohodné. 
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%=
 \newpage
@@ -338,6 +343,11 @@ Strana 90-99.
 \textit{Modelování a simulace: ??? Zařízení s vylučným přístupem ???.}
 Dostupné z: \textless https://www.fit.vutbr.cz/study/courses/IMS/public/prednasky/IMS.pdf\textgreater.
 Strana ???.
+
+\bibitem{simlib} P. Peringer, D. Leska, D. Martinek.
+\textit{SIMLIB/C++  ==  SIMulation LIBrary for C++.}
+Dostupné z: \textless http://www.fit.vutbr.cz/~peringer/SIMLIB/\textgreater.
+
 
 \end{thebibliography}
 
