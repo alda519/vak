@@ -41,7 +41,7 @@
 \section{Úvod}
 
 V této práci je řešena implementace systému hromadné obsluhy \cite{ims-sho}, která bude použita pro 
-sestavení modelu \cite{ims-zakladni-pojmy} zpracování dokumentů v administrativě firmy Vodovody a kanalizace Vyškov.
+sestavení modelu \cite{ims-zakladni-pojmy} zpracování dokumentů v administrativě firmy Vodovody a~ka\-na\-li\-za\-ce Vyškov.
 
 Na základě modelu a simulačních experimentů bude ukázáno 
 chování systému \cite{ims-chovani-systemu} toku dokumentů mezi jednotlivými zaměstnanci firmy v podmínkách běžné denní činnosti firmy.
@@ -72,7 +72,7 @@ Počet a procentuální rozdělení příchozích dokumentů byl konzultován s 
 % Kapitola 2 - 
 \section{Rozbor tématu a použitých metod/technologií}
 
-Administrativa společnosti Vodovody a kanalizace Vyškov zahrnuje zpracování dokumentů (stížnosti, žádosti, smlouvy a dotazy), které jim lidé posílají poštou, elektronicky emaily a datovými schránkami a doručují osobně. Tok dokumentů je znázorněn na obrázku \ref{tok_dokumentu} a popsán v následujících odstavcích.
+Administrativa společnosti Vodovody a kanalizace Vyškov zahrnuje zpracování dokumentů (stížnosti, žádosti, smlouvy a dotazy), které jim lidé posílají poštou, elektro\-nicky emaily a datovými schránkami a doručují osobně. Tok dokumentů je znázorněn na obrázku \ref{tok_dokumentu} a popsán v následujících odstavcích.
 
 Všechny příchozí dokumenty zpracovává sekretářka ředitele, která je musí naskenovat speciálním skenerem, vytisknout označené čárovým kódem a zaevidovat do informačního systému. Sekretářka se administrativní činnosti věnuje celou svou pracovní dobu.
 
@@ -131,7 +131,7 @@ Tedy v čase 0 začíná první pracovní den a v čase 7.5 začíná druhý bez
 Příchody dokumentů do systému modelujeme procesy zvlášť pro příchozí klasickou poštu, elekteronickou poštu a příchody lidí osobně.
 Elektronická pošta zahrnuje emaily společně s datovými schránkami, není potřeba je rozlišovat, protože jejich zpracování probíhá totožně.
 Příchody lidí jsou modelovány příchody procesů v intervalech daných exponenciálním rozdělením se středem $T/n$ \cite{ims-rozlozeni}, kde $T$ je délka pracovního dne v ho\-di\-nách a $n$ průměrný počet příchodů denně.
-Obdobně je modelován příchod dokumentů elektronicky, možnost příchodu elektronické zprvávy mimo pracovní dobu (např. v noci) zanedbáváme.
+Obdobně je modelován příchod dokumentů elektronicky, možnost příchodu elektronické zprvávy mimo pracovní dobu (např. v~noci) zanedbáváme.
 
 Ředitel společnosti je modelován zařízením s výlučným přístupem \cite{ims-zarizeni}, které je po dobu 6.5 hodiny obsazeno procesem s vyšší prioritou obsluhy,
 který představuje všechny jeho pracovní povinnosti mimo administrativu, pro kterou je po zbylou 1 hodinu uvolněn.
@@ -196,7 +196,7 @@ Experimentováním s modelem chceme zjistit možné doby transakcí strávených
 \subsection{Postup experimentování}
 V modelu jsou již zaneseny zjištěné informace, jako například pracovní doba, množství příchozích transakcí a jejich časová rozložení, doba mezi poruchami, čas, který jednotliví pracovníci stráví nad jednou transakcí, pravděpodobnost, zda je ředitel v práci, atd. Tyto údaje jsou výrazným činitelem ovlivňujícím výsledek experimentu. Proto jsou zpočátku nastaveny na zjištěné a dále pro simulaci upravené hodnoty. Ty se budou pomocí experimentů dále upravovat tak, až bude model dostatečně podobný realitě. Poté se bude experimentovat pomocí změn těchto hodnot pro zjištění optimalizací systému.
 
-Výsledkem experimentu bude histogram zobrazující dobu, kterou transakce stráví v systému. To znamená dobu do doručení transakce přímo adresátovi. Následná doba vyřizování příslušné transakce/dokumentu je v experimentech zanedbána, protože už se nejedná a studavanou problematiku. Z histogramu zjistíme, jaké jsou výsledky. Proč jsou výsledky takové, zjistíme z grafu závislostí vytíženosti jednotlivých pracovníků - kde se hromadí dokumenty, kdo je kdy zpracovává, atd. 
+Výsledkem experimentu bude histogram zobrazující dobu, kterou transakce stráví v~sys\-té\-mu. To znamená dobu do doručení transakce přímo adresátovi. Následná doba vy\-ři\-zo\-vá\-ní příslušné transakce/dokumentu je v experimentech zanedbána, protože už se nejedná a studavanou problematiku. Z histogramu zjistíme, jaké jsou výsledky. Proč jsou výsledky takové, zjistíme z grafu závislostí vytíženosti jednotlivých pracovníků - kde se hromadí dokumenty, kdo je kdy zpracovává, atd. 
 
 %
 %
@@ -212,7 +212,7 @@ Experimenty budou modelovat průběh padesáti pracovních dnů.
 V tomto experimentu jsme parametry modelu nijak nemodifikovali, očekávali jsme, že výsledky budou odpovídat skutečnosti.
 Oproti očekávání se většina transakcí dokončila velice rychle.
 Histogram doby zpracování dokumentu v systému je na obrázku \ref{exp1_histogram}.
-V~průběhu padesáti pracovních dnů systémem prošlo 2721 transakcí.
+V~prů\-bě\-hu padesáti pracovních dnů systémem prošlo 2721 transakcí.
 Ma\-xi\-mál\-ní doba trans\-ak\-ce strávené v systému byla 19.6 pracovních hodin.
 Průměrná doba vyřízení transakce byla 8.01 pracovních hodin. Standardní odchylka 3.87 hodiny.
 
@@ -259,7 +259,7 @@ Modelovali jsme poruchu zařízení, kterou se podaří odstranit až po 3 dnech
 Cílem experimentu je zjištění, za jak dlouho se systém po takové poruše vrátí do normálního provozu.
 
 Graf závislosti délky front na čase ja znázorněn na obrázku \ref{exp3_graf}. Červenou a zelenou barvou jsou zobrazeny
-počty dokumentů, které mají ředitel a sekretářka ve frontě k vyřízení. Modrá barva pro názornost zobrazuje jednotlivé
+počty dokumentů, které mají ředitel a sekretářka ve frontě k~vyřízení. Modrá barva pro názornost zobrazuje jednotlivé
 dny (každá půlperioda ob\-dél\-ní\-ko\-vé\-ho signálu je jeden den). Růžovou barvou je znázorněno trvání poruchy.
 
 Z grafu je patrné, že po odstranění poruchy se podaří sekretářce vyrovnat s takovou mimořádnou situací až po 13 dnech. Řediteli by to trvalo ještě déle, to je způsobeno také tím, že ne každý den se administrativě může věnovat.
@@ -284,7 +284,7 @@ dočasná výpomoc sekretářce dalším pracovníkem. Tento scénář je pouze 
 % Co bylo experimentováním zjištěno
 % Jaké chyby v modelu byly odstraněny (oproti původním předpokladům ... došlo ke změně koncepce ... protože ..
 \subsection{Závěr experimentů}
-Oproti původním předpokladům došlo ke změně koncepce, protože doba setrvání transakcí v systému byla příliš nízká a neodpovídala realitě. Bylo to způsobeno přílišný zjednodušením reality a zanedbáním faktu, že se pracovníci věnují i jiné práci než jen administrativě (kromě sekretářky). Změna se týkala hlavně pracovní činnosti náměstků.
+Oproti původním předpokladům došlo ke změně koncepce, protože doba setrvání trans\-ak\-cí v systému byla příliš nízká a neodpovídala realitě. Bylo to způsobeno přílišný zjed\-no\-du\-še\-ním modelu a zanedbáním faktu, že se pracovníci věnují i jiné práci než jen administrativě (kromě sekretářky). Změna se týkala hlavně pracovní činnosti náměstků.
 
 Byly provedeny 3 hlavní experimenty. První experiment byl testovací. Druhý experiment odpovídá reálnému provozu firmy Vodovody a kanalizace Vyškov. Třetí experiment ukazuje, co se stane při dlouhodobější poruše technického zařízení, jaké to bude mít důsledky do budoucna. Experimenty bylo ukázáno, jak se zvýši pracovní zatížení zaměstanců společnosti v závislosti na intenzitě příchodů dokumentů k vyřízení. Z experimentů lze odvodit, že chování systému je dostatečně věrohodné.
 
