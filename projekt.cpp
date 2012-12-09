@@ -10,6 +10,11 @@
 
 // vyber nastaveni modelu
 #define SIM_MODEL_VAK
+//#define SIM_EXPERIMENT1
+//#define SIM_EXPERIMENT2
+//#define SIM_EXPERIMENT3
+//#define SIM_EXPERIMENT4
+
 
 // model dle zjistenych dat
 #if defined(SIM_MODEL_VAK)
