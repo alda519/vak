@@ -123,6 +123,14 @@ class Dokument : public Process
             Wait(WOR_TCH_DEP);
             // u nej se to ma taky zdrzet den-dva
             Release(namestek_tech);
+
+            // 60% jde VTU
+            if(Random() < 0.60) {
+                Seize(vedouci_tech);
+                Wait(1.0/20);
+                Release(vedouci_tech);
+            }
+
             if(Random() < 0.02)
                 goto dorucen_zle;
         }
