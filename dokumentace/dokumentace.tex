@@ -149,13 +149,30 @@ Poruchy zařízení sekretářky jsou modelovány procesy s příchodem s expone
 % Kapitola 4 - 
 \section{Architektura simulačního modelu/simulátoru}
 
+Simulační model je implementován v jazyce C++ s využitím knihovny SIMLIB/C++.
+% tohle je nejake moc strucne
+
 % Nejméně zajímavá část. Obvykle se neuvádí.
 % Rozeberte několik nejzajímavějších partií implementace
 % Případná uživatelská příručka (spuštění programu, struktura výpisů, ...).
 % O funkčnosti modelu musí přesvědčit kapitla 3.
 % Není to referenční příručka!
 
-% tuhle kapitolu asi hodne odflaknem, kdyz pise, ze neni zajimava
+% kapitola 4.1: Minimálně je nutno ukázat mapování abstraktního (koncept.) modelu do simulačního (resp. simulátoru). Např. které třídy odpovídají kterým procesům/veličinám a podobně. 
+\subsection{Popis významu tříd simulačního modelu}
+
+Příchozí dokumenty do systému v simulačním modelu jsou reprezezentovány instancemi třídy {\tt Dokument}.
+
+Zaměstnance společnosti reprezentují zařízení {\tt reditel} - ředitel, {\tt sekretarka} - sekretářka, {\tt namestek\_tech} - technický náměstek,
+{\tt namestek\_ekon} - ekonomický náměstek a {\tt vedouci\_tech} - vedoucí technického úseku.
+
+Poruchy reprezentují události {\tt Porucha}.
+Událost Email repreztuje příchod elektronického dokumentu, událost Lide společně s procesem {\tt Clovek} příchod lidí osobně.
+Událost {\tt Postacka} reprezentuje příchod pracovnice pošty s poštou.
+
+Procesy {\tt Reditel}, {\tt Namestek\_t} a {\tt Nameste\_e} modelují pracovní dobu ředitele a náměstků, kteří se nevěnují jen administrativě.
+
+
 \newpage
 
 
