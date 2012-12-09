@@ -41,16 +41,16 @@
 \section{Úvod}
 
 V této práci je řešena implementace systému hromadné obsluhy \cite{ims-sho}, která bude použita pro 
-sestavení modelu zpracování dokumentů v administrativě firmy Vodovody a kanalizace Vyškov.
+sestavení modelu \cite{ims-zakladni-pojmy} zpracování dokumentů v administrativě firmy Vodovody a kanalizace Vyškov.
 
 Na základě modelu a simulačních experimentů bude ukázáno 
-chování systému toku dokumentů mezi jednotlivými zaměstnanci firmy v podmínkách běžné denní činnosti firmy.
+chování systému \cite{ims-chovani-systemu} toku dokumentů mezi jednotlivými zaměstnanci firmy v podmínkách běžné denní činnosti firmy.
 
 Smyslem experimentů je demonstrovat, jak se při změně jakékoliv veličiny ovlivňující tok dokumentů ve studované firmě změní délka zpracování daného dokumentu či vy\-tí\-že\-ní ostatních zaměstnanců studované firmy.
 
 Správnost zvolené koncepce byla ověřena přímo se zaměstnancem studované firmy.
 
-\textit{(pro zpracování modelu bylo nutno nastudovat ..., zpracovat, ... model je ve svém oboru zajímavý/ojedinělý v ...)}
+% \textit{(pro zpracování modelu bylo nutno nastudovat ..., zpracovat, ... model je ve svém oboru zajímavý/ojedinělý v ...)}
 
 \subsection{Kdo se na práci podílel}
 Autory této práce jsou Michal Cupák a Aleš Dujíček, studenti Fakulty informačních technologií Vysokého učení technického v Brně
@@ -60,7 +60,7 @@ Fakta o společnosti nám laskavě poskytl pan Ing. Oldřich Novoměstský, vedo
 Odborným konzultantem byl taktéž Ing. Novoměstský ve spolupráci s paní Annou Sý\-ko\-ro\-vou, se\-kre\-tář\-kou ředitele.
 
 \subsection{Ověření validity modelu}
-Ověřování validity modelu probíhalo při osobních setkáních s Ing. Novoměstským. Jednalo se především o vysvětlení problematiky zpracování dokumentů ve studované firmě. Dále pak o ověření funkčnosti modelu pomocí konzultace grafů vzniklých ze simulace.
+Ověřování validity modelu probíhalo při osobních setkáních s Ing. Novoměstským. Jednalo se především o vysvětlení problematiky zpracování dokumentů ve studované firmě. Dále pak o ověření funkčnosti modelu pomocí konzultace grafů vzniklých ze simulace \cite{ims-zakladni-pojmy}.
 
 Počet a procentuální rozdělení příchozích dokumentů byl konzultován s paní Sýkorovou, která má tyto dokumenty zpočátku na starosti.
 
@@ -81,7 +81,6 @@ V úseku ředitele jsou dokumenty přímo přidělovány ředitelem konkrétním
 
 Dokumenty k vyřízení v ekonomickém úseku prostuduje ekonomický náměstek, který potom jejich vyřízením pověřuje své přímé podřízené.
 
-% jeste tam je vedouci technickoho useku
 V technickém úseku dokumenty nejprve prostuduje technický náměstek. Ten může jejich vyřízením pověřit své přímé podřízené, nebo může daný dokument předat vedoucímu technického úseku, který jej následně předá k vyřízení některému ze svých přímých podřízených.
 
 Průměrně jednou až dvakrát měsíčně se objeví porucha technického zařízení, se kterým pracuje sekretářka. Ta potom po dobu opravy, která trvá průměrně 3 hodiny, nemůže dokumenty zpracovávat.
@@ -106,18 +105,18 @@ Všechny informace uvedené v této kapitole byly poskytnuty zaměstnancem veden
 \newpage
 
 % Kapitola 3 - 
-\section{Koncepce - modelářská témata}
+\section{Koncepce}
 
 Jako jednotku času v simulaci jsme zvolili jednu hodinu.
-Modelovat budeme pouze pracovní dobu zaměstnanců. Noci, víkendy a jiné události, kvůli kterým se nepracuje, jsou vynechány.
+Modelovat \cite{ims-zakladni-pojmy} budeme pouze pracovní dobu zaměstnanců. Noci, víkendy a jiné události, kvůli kterým se nepracuje, jsou vynechány.
 Tedy v čase 0 začíná první pracovní den a v čase 7.5 začíná druhý bez ohledu na to, zda mezi nimi byl např. víkend.
 
 Příchody dokumentů do systému modelujeme procesy zvlášť pro příchozí klasickou poštu, elekteronickou poštu a příchody lidí osobně.
 Elektronická pošta zahrnuje emaily společně s datovými schránkami, není potřeba je rozlišovat, protože jejich zpracování probíhá totožně.
-Příchody lidí jsou modelovány příchody procesů v intervalech daných exponenciálním rodělením se středem $T/n$, kde $T$ je délka pracovního dne v hodinách a $n$ průměrný počet příchodů denně.
+Příchody lidí jsou modelovány příchody procesů v intervalech daných exponenciálním rozdělením se středem $T/n$ \cite{ims-rozlozeni}, kde $T$ je délka pracovního dne v hodinách a $n$ průměrný počet příchodů denně.
 Obdobně je modelován příchod dokumentů elektronicky, možnost příchodu elektronické zprvávy mimo pracovní dobu (např. v noci) zanedbáváme.
 
-Ředitel společnosti je modelován zařízením s výlučným přístupem, které je po dobu 6.5 hodiny obsazeno procesem s prioritou obsluhy
+Ředitel společnosti je modelován zařízením s výlučným přístupem \cite{ims-zarizeni}, které je po dobu 6.5 hodiny obsazeno procesem s prioritou obsluhy
 představujícím všechny jeho pracovní povinnosti mimo administrativu, pro kterou je po zbylou 1 hodinu uvolněn.
 Nezabýváme se, kdy přesně se administrativě ředitel věnuje, modelujeme pouze fakt, že se této činnosti věnuje pravidelně každý den danou dobu.
 + někdy je pryč pořád
@@ -180,13 +179,36 @@ poruchy
 %\renewcommand{\refname}{Literatura}
 %\cite{voj,has}
 \begin{thebibliography}{99}
+
 \bibitem{ims-sho} P. Peringer.
 \textit{Modelování a simulace: Systémy hromadné obsluhy.}
 Dostupné z: \textless https://www.fit.vutbr.cz/study/courses/IMS/public/prednasky/IMS.pdf\textgreater.
 Strana 139.
+
+\bibitem{ims-zakladni-pojmy} P. Peringer.
+\textit{Modelování a simulace: Zakladni pojmy.}
+Dostupné z: \textless https://www.fit.vutbr.cz/study/courses/IMS/public/prednasky/IMS.pdf\textgreater.
+Strana 7-8.
+
+\bibitem{ims-chovani-systemu} P. Peringer.
+\textit{Modelování a simulace: Chování systému.}
+Dostupné z: \textless https://www.fit.vutbr.cz/study/courses/IMS/public/prednasky/IMS.pdf\textgreater.
+Strana 24.
+
+\bibitem{ims-rozlozeni} P. Peringer.
+\textit{Modelování a simulace: Nekterá často používaná rozložení.}
+Dostupné z: \textless https://www.fit.vutbr.cz/study/courses/IMS/public/prednasky/IMS.pdf\textgreater.
+Strana 90-99.
+
+\bibitem{ims-zarizeni} P. Peringer.
+\textit{Modelování a simulace: ??? Zařízení s vylučným přístupem ???.}
+Dostupné z: \textless https://www.fit.vutbr.cz/study/courses/IMS/public/prednasky/IMS.pdf\textgreater.
+Strana ???.
+
 %\bibitem{voj} T. Vojnar. Towards Formal Analysis and Verification
 %over State Spaces of Object-Oriented Petri Nets. PhD. thesis,
 %Brno University of Technology, Brno, Czech Republic, 2001.
+
 \end{thebibliography}
 
 \end{document}
