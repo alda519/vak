@@ -206,7 +206,7 @@ Experimenty budou modelovat průběh padesáti pracovních dnů.
 V tomto experimentu jsme parametry modelu nijak nemodifikovali, očekávali jsme, že výsledky budou odpovídat skutečnosti.
 Oproti očekávání se většina transakcí dokončila velice rychle.
 Histogram doby zpracování dokumentu v systému je na obrázku \ref{exp1_histogram}.
-V období padesáti pracovních dnů systémem prošlo 2721 transakcí.
+V~průběhu padesáti pracovních dnů systémem prošlo 2721 transakcí.
 Ma\-xi\-mál\-ní doba trans\-ak\-ce strávené v systému byla 19.6 pracovních hodin.
 Průměrná doba vyřízení transakce byla 8.01 pracovních hodin. Standardní odchylka 3.87 hodiny.
 
@@ -227,6 +227,28 @@ pouze hodinu během jednoho pracovního dne jako ředitel.
  \end{center}
 \end{figure}
 
+
+
+
+
+\subsection{Experiment 3}
+
+V tomto experimentu jsme sledovali reakci systému na mimořádně dlouhou poruchu zařízení, se kterým pracuje sekretářka.
+Modelovali jsme poruchu zařízení, kterou se podaří odstranit až po 3 dnech.
+Cílem experimentu je zjištění, jak dlouho po takové poruše se systém vrátí do normálního provozu.
+
+Graf závislosti délky front na čase ja znázorněn na obrázku \ref{exp3_graf}. Červenou a zelenou barvou jsou zobrazeny
+počty dokumentů, které mají ředitel a sekretářka ve frontě k vyřízení. Modrá barva pro názornost zobrazuje jednotlivé
+dny (každá půlperioda obdélníkového signálu je jeden den). Růžovou barvou je znázorněno trvání poruchy.
+
+\begin{figure}[ht]
+ \begin{center}
+    \scalebox{0.6}{ \includegraphics{../experimenty/ex3-graf.png} }
+    \caption{3. experiment - časový průběh délek front}
+    \label{exp3_graf}
+ \end{center}
+\end{figure}
+
 % 5.3 Závěr experimentů
 % Co bylo experimentováním zjištěno
 % Jaké chyby v modelu byly odstraněny (oproti původním předpokladům ... došlo ke změně koncepce ... protože ..
@@ -235,6 +257,14 @@ pouze hodinu během jednoho pracovního dne jako ředitel.
 
 % Kapitola 6 - 
 \section{Shrnutí simulačních experimentů a závěr}
+
+Vytvořili jsme model administrativní činnosti pracovníků společnosti Vodovody a kanalizace Vyškov.
+
+ bla bla.
+
+Experimenty bylo ukázáno, jak se zvýši pracovní zatížení zaměstanců společnosti v závislosti na intenzite příchodů
+dokumentů k vyřízení.
+% bla bla ke kazdemu modelu nejaka veticka a bude to hotove
 
 % Jednoznačná odpověď na prvotní otázku studie.
 %  Studií provedenou na našem modelu bylo jednoznačně prokázáno/vyvráceno, že ...

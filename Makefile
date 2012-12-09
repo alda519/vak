@@ -4,9 +4,10 @@ CPPFLAGS=-lsimlib
 
 projekt: projekt.cpp
 
-ims-vak: ims-vak.cpp
 
-vak: vak.cpp
+zip:
+	tar czf 07_xcupak04_xdujic01.tar.gz experimenty projekt.cpp Makefile dokumentace/dokumentace.pdf plot
+
 
 run: projekt
 	./projekt > projekt.dat

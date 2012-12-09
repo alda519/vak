@@ -43,9 +43,9 @@
     // zpracovani reditelem
     #define WOR_DIR (1.0 / 80)
     // zpracovani dokumentu tech. namestkem [hod]
-    #define WOR_TCH_DEP (1.0 / 40)
+    #define WOR_TCH_DEP (1.0 / 60)
     // zpracovani dokumentu ekon. namestkem [hod]
-    #define WOR_EKO_DEP (1.0 / 30)
+    #define WOR_EKO_DEP (1.0 / 60)
 
     // procentualni rozdeleni dokumentu mezi useky
     #define SEC_DIRECTOR 0.05
@@ -81,6 +81,8 @@ Facility vedouci_tech("Vedouci technickeho useku");
 
 Histogram delka("Doba zpracovani dokumentu", 0, 1, 50);
 
+Histogram histo("Doba zpracovani sekretarkou", 0, 1, 50);
+
 extern int posta;
 
 // Prichozi dokument - od stiznosti, pres smlouvy, posudky, rozhodnuti...
@@ -94,6 +96,8 @@ class Dokument : public Process
         Seize(sekretarka);
         Wait(WOR_SEC);
         Release(sekretarka);
+
+        histo(Time - born);
 
         // reditel velmi kratce prohledne dokument a prideli nekteremu useku
         Seize(reditel);
@@ -304,7 +308,7 @@ class Porucha : public Process
     void Behavior()
     {
         // porucha se objevuje 1-2 x za mesic
-        while(1) {
+        do {
             double d = PORUCHA;
             Wait(d);
             Seize(sekretarka, 1);
@@ -312,7 +316,7 @@ class Porucha : public Process
             Wait(3);
             Release(sekretarka);
             porucha = false;
-        }
+        } while(0);
     }
 };
 
@@ -370,6 +374,7 @@ int main()
     SetOutput("statistiky");
     sekretarka.Output();
     reditel.Output();
+    histo.Output();
     delka.Output();
 
     return 0;
