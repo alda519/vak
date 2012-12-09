@@ -2,6 +2,15 @@
 # Autor: Michal Cupák (xcupak04)
 # Datum: 2011-03-29
 
+#bib:
+#	latex dokumentace.tex
+#	bibtex dokumentace.aux
+#	latex dokumentace.tex
+#	latex dokumentace.tex
+#	dvips -t a4 dokumentace.dvi
+#	ps2pdf dokumentace.ps
+
+
 tex2pdf:
 	pdfcslatex dokumentace.tex
 	pdfcslatex dokumentace.tex
