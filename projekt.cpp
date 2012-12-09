@@ -79,7 +79,7 @@ Facility namestek_tech("Technicky namestek");
 Facility namestek_ekon("Ekonomicky namestek");
 Facility vedouci_tech("Vedouci technickeho useku");
 
-Histogram delka("Doba zpracovani dokumentu", 0, 0.5, 50);
+Histogram delka("Doba zpracovani dokumentu", 0, 1, 50);
 
 extern int posta;
 
